@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ReactBricks } from 'react-bricks/frontend'
 import type { AppProps } from 'next/app'
 import config from '../react-bricks/config'
@@ -7,8 +7,8 @@ import '../css/styles.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   // Color Mode Management
-  const savedColorMode =
-    typeof window === 'undefined' ? '' : localStorage.getItem('color-mode')
+  const [savedColorMode, setColor] = useState('color-mode')
+  useEffect(() => setColor(''), [])
   const [colorMode, setColorMode] = useState(savedColorMode || 'light')
   const toggleColorMode = () => {
     const newColorMode = colorMode === 'light' ? 'dark' : 'light'
